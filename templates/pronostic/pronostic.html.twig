@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }} {% endblock %}
+
+{% block body %}
+	<section id="team2" class="section gray-bg">
+			<div class="container">
+				<div class="row">
+					<h2 class="margin-top">{{ title }}</h2>
+				</div>
+				<div class="row">
+					{% if games is defined and games is not null %}
+							<div class="row title">
+								<h4 class="light muted">Vos pronostics</h4>
+							</div>
+							{% for game in games %}
+								{% include '/match.html.twig' with {'id': game.id, 'team1': game.team1, 'team2': game.team2, 'score1': game.pscore1, 'score2':game.pscore2, 'date':game.date, 'btn_label': 'Modifier', btn_path : path('pronostic_edit', {'id' : game.id}) }  %}
+			        {% else %}
+							<div class="alert alert-info" role="alert">Vous n'avez aucun pronostic en cours.</div>
+			        {% endfor %}
+					{% endif %}
+				</div>
+				<div class="row title m-t-10">
+					<br/>
+					<h4 class="light muted margin-top">Match à pronostiquer</h4>
+				</div>
+
+				<div class="row">
+					{% if games is defined and games is not null %}
+
+							{% for game in games2 %}
+							{% include '/match.html.twig' with {'id': game.id, 'team1': game.team1, 'team2': game.team2, 'score1': game.score1, 'score2':game.score2, 'date':game.date, 'btn_label': 'Jouer', btn_path : path('pronostic_new', {'id' : game.id}) }  %}
+							{% else %}
+							<div class="alert alert-info" role="alert">Vous n'avez pas encore pronostiquer de match.</div>
+							{% endfor %}
+					{% endif %}
+
+				</div>
+			</div>
+		</section>
+{% endblock %}

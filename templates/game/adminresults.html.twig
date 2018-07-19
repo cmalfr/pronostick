@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+<header style="height: 500px" id="intro">
+	<div class="cut cut-top"></div>
+	<div class="container">
+		<div class="row intro-tables animated fade-in">
+
+			<div class="col-md-4">
+				{% include '/game/classement.html.twig' %}
+			</div>
+
+			<div class="col-md-4">
+				<div class="intro-table intro-table-hover">
+					<h5 class="white heading hide-hover">Participation</h5>
+					<div class="bottom">
+						<h4 class="white heading small-heading no-margin regular">{{ nbuser }} pronostiqueurs</h4>
+						<h4 class="white heading small-pt">ont participé.</h4>
+						<a href="{{ path('user_index') }}" class="btn btn-white-fill expand">Utilisateurs</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="intro-table intro-table-third">
+					<h5 class="white heading">Statistiques</h5>
+					<div class="owl-testimonials bottom">
+						<div class="item">
+							<h4 class="white heading small-heading no-margin regular">{{ usernbpronos }} pronostiques</h4>
+							<h4 class="white heading small-pt">ont été soumis</h4>
+						</div>
+						<div class="item">
+							<h4 class="white heading small-heading no-margin regular">{{ userbonpronos }} / {{ usernbpronos }} </h4>
+							<h4 class="white heading small-pt">se sont avérés justes</h4>
+						</div>
+						<div class="item">
+							<h4 class="white heading small-heading no-margin regular">Soit un taux de</h4>
+							<h4 class="white heading small-pt">{{ successpercent }}%</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+	<section id="team2" class="section gray-bg">
+			<div class="container">
+				<div class="row title">
+					<div class="col-md-6">
+						<h2 class="margin-top" >Résultats</h2>
+						<h4 class="light muted">Saisir les scores</h4>
+					</div>
+						<div class="margin-top col-md-6">
+							<a href="{{ path('game_new') }}" class="pull-right btn btn-blue-fill" >Nouveau match</a>
+						</div>
+				</div>
+				<div class="row">
+
+					{% for game in games %}
+						{% include '/match.html.twig' with {'id': game.id, 'team1': game.team1, 'team2': game.team2, 'score1': game.score1, 'score2':game.score2, 'date':game.date}  %}
+	        {% else %}
+					<div class="alert alert-danger" role="alert">Aucun résultat!</div>
+	        {% endfor %}
+
+				</div>
+			</div>
+		</section>
+
+{% endblock %}

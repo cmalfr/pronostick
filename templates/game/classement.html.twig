@@ -1,0 +1,16 @@
+<div class="intro-table intro-table-first">
+  <h5 class="white heading">Classement</h5>
+  <div class="owl-carousel owl-schedule bottom">
+
+    <div class="item">
+      {% for player in classement %}
+        {% include '/game/row_classmt.html.twig' with {'position': loop.index, 'player': player.username, 'score': player.total }  %}
+        {% if loop.index in multiples %}
+        </div>
+        <div class="item">
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</div>

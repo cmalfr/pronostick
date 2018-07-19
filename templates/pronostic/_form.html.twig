@@ -1,0 +1,27 @@
+{{ form_start(form, { 'attr' : { 'class': 'popup-form' } }) }}
+<div class="row">
+  <div class="col-sm-12 text-center-mobile">
+  	<div class="row opening-hours">
+  		<div class="col-sm-5 text-center-mobile">
+        <h3 class="regular white">{{ team1 }}</h3>
+        <h5>{{ form_widget(form.pscore1) }}<h5>
+  		</div>
+      <div class="col-sm-2 text-center-mobile">
+        <h3 class="regular white">Vs.</h3>
+  		</div>
+  		<div class="col-sm-5 text-center-mobile">
+        <h3 class="regular white">{{ team2 }}</h3>
+        <h5>{{ form_widget(form.pscore2) }}<h5>
+  		</div>
+  	</div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-white-fill">{{ button_label|default('Valider') }}</button><br/>
+    <br/><a href="{{ path('game_results') }}" class="btn btn-primary mb-2 push-left">Retour</a>
+  </div>
+</div>
+{{ form_end(form) }}

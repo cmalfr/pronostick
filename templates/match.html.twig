@@ -1,0 +1,44 @@
+{% if app.request.attributes.get('_route') != "game_allresults" %}
+  {% if is_granted('ROLE_ADMIN') %}
+    {% set btn_label = "action" %}
+    {% set btn_path = "action" %}
+  {% endif %}
+{% endif %}
+
+<div id="{{ id }}" class="col-md-6 team text-center">
+  <div class="col-md-4 col-sm2">
+      <div class="title">
+        <img class="hidden-sm hidden-xs avatar" src="{{ asset('img/wc2018.jpg') }}" alt="Team Image">
+        <h4>{{ team1 }}</h4>
+      </div>
+  </div>
+  <div class="col-md-4 col-sm-2">
+    <div class="cover">
+      <div class="text-center">
+        <!-- {{ app.request.attributes.get('_route') }}-->
+        {% if pscore1 is defined and pscore1 is not null %}
+          <h3 class="{% if result is not null %}{% if result == 100 %}text-success{% else %}text-danger{% endif %}{% endif %}">
+          {{ pscore1 }} - {{ pscore2 }}
+          </h3>
+        {% endif %}
+        {% if score1 is defined and score1 is not null %}
+          <h3>{{ score1 }} - {{ score2 }}</h3>
+        {% endif %}
+        <h6 class="light muted">{{ date|date('d/m/Y à H') }}h </h6>
+        {% if app.request.attributes.get('_route') != "game_results" %}
+          {% if btn_path is defined %}
+            <a href="{{ btn_path }}"class="btn btn-blue-fill ripple">
+            {{ btn_label }}
+            </a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-2">
+      <div class="title">
+        <img class="hidden-sm hidden-xs avatar" src="{{ asset('img/wc2018.jpg') }}" alt="Team Image">
+        <h4>{{ team2 }}</h4>
+      </div>
+  </div>
+</div>

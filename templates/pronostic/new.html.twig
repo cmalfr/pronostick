@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Pronostic{% endblock %}
+
+{% block body %}
+<section class="section section-padded blue-bg text-center">
+
+    <h3 class="white">Votre Pronostick</h1>
+
+    {{ include('pronostic/_form.html.twig') }}
+
+    <a href="{{ path('pronostic_index') }}">back to list</a>
+</section>
+{% endblock %}

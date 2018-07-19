@@ -1,0 +1,33 @@
+<div class="preloader">
+  <img src="{{ asset('img/loader.gif') }}" alt="Preloader image">
+</div>
+<nav class="navbar navbar-fixed-top" style="position: fixed; top: 0px; margin-top: 0px; opacity: 1;">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><p><img src="{{ asset('img/logo-active.png') }}" data-active-url="{{ asset('img/logo-active.png') }}" alt=""> Bienvenue {{ app.user.username }}</p></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right main-nav">
+        <li class="nav{{ app.request.get('_route') == 'game_results' or app.request.get('_route') == 'game_allresults' ? ' active' }}">
+          <a href="{{ path('game_results') }}">Résultats</a>
+        </li>
+        <li class="nav{{ app.request.get('_route') == 'pronostic_list' ? ' active' }}">
+          <a href="{{path('pronostic_list')}}">Pronostiquer</a>
+        </li>
+        <li>
+          <a href="{{ path('logout') }}" class="btn btn-blue">Déconnexion</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+ <!-- /.container-fluid -->
+</nav>

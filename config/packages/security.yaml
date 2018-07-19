@@ -1,0 +1,65 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        # sur quelle entitée et comment on souhaite que le mot de passe soit encrypté
+        App\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+
+    providers:
+        # d'ou proviennent les user à contrôler ?
+        users_from_db:
+          # nom du provider que l'on est libre de choisir
+            entity:
+                class: App\Entity\User
+                property: username
+                # On dit que le provider est notre entité user, à contrôler sur la base du "username"
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+            #filtre du firewall pour qu'il ne s'applique pas au _profiler (dev/debug)
+        main:
+            anonymous: ~
+            #comportement du formulaire de login
+            form_login:
+                provider: users_from_db
+                # submit the login form here
+                check_path: login
+                # the user is redirected here when they need to log in
+                login_path: login
+                # field names for the username and password fields
+                username_parameter: login[_username]
+                password_parameter: login[_password]
+                # csrf token options
+                csrf_parameter: login[_token]
+                csrf_token_id:        authenticate
+                post_only:  true
+                default_target_path: game_results
+            #création de la route logout qui invalide la session
+            logout:
+                path:   /logout
+                target: /
+                invalidate_session: true
+
+            # activate different ways to authenticate
+            #http_basic: true
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: true
+            # https://symfony.com/doc/current/security/form_login_setup.html
+
+    #liste des roles utilisateurs
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_ADMIN:       ROLE_USER
+
+    # répartion des droits d'acces aux differentes pages en fonction du rôle
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/new, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/, roles: ROLE_USER }
+        #- { path: ^/profile, roles: ROLE_USER }

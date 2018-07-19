@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+		<head>
+				<meta charset="UTF-8">
+				<meta http-equiv="X-UA-Compatible" content="IE=edge">
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+				<title>Pronosticks App</title>
+				<meta name="description" content="une supere appli de pronostic" />
+				<meta name="keywords" content="pronostic" />
+				<meta name="author" content="Cedric avec Openska" />
+				<!-- Favicons (created with http://realfavicongenerator.net/)-->
+				<link rel="apple-touch-icon" sizes="57x57" href="{{ asset('img/favicons/apple-touch-icon-57x57.png') }}">
+				<link rel="apple-touch-icon" sizes="60x60" href="{{ asset('img/favicons/apple-touch-icon-60x60.png') }}">
+				<link rel="icon" type="image/png" href="{{ asset('img/favicons/favicon-32x32.png') }}" sizes="32x32">
+				<link rel="icon" type="image/png" href="{{ asset('img/favicons/favicon-16x16.png') }}" sizes="16x16">
+				<link rel="manifest" href="{{ asset('img/favicons/manifest.json') }}">
+				<link rel="shortcut icon" href="{{ asset('img/favicons/favicon.ico') }}">
+				<meta name="msapplication-TileColor" content="#00a8ff">
+				<meta name="msapplication-config" content="{{ asset('img/favicons/browserconfig.xml') }}">
+				<meta name="theme-color" content="#ffffff">
+
+				{% block stylesheets %}
+				<!-- Normalize -->
+				<link rel="stylesheet" type="text/css" href="{{ asset('css/normalize.css') }}">
+				<!-- Bootstrap -->
+				<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
+				<!-- Owl -->
+				<link rel="stylesheet" type="text/css" href="{{ asset('css/owl.css') }}">
+				<!-- Animate.css -->
+				<link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
+				<!-- Font Awesome -->
+				<link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome-4.1.0/css/font-awesome.min.css') }}">
+				<!-- Elegant Icons -->
+				<link rel="stylesheet" type="text/css" href="{{ asset('fonts/eleganticons/et-icons.css') }}">
+				<!-- Main style -->
+				<link rel="stylesheet" type="text/css" href="{{ asset('css/cardio.css') }}">
+				{% endblock %}
+
+		</head>
+
+<body class="section section-padded blue-bg text-center">
+
+  <h3 class="white">Créer un compte</h1>
+
+    {{ include('user/_form.html.twig') }}
+
+    {% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+    <a href="{{ path('login') }}" class="btn btn-primary mb-2">Retour</a>
+    {% else %}
+    <a href="{{ path('user_index') }}" class="btn btn-primary mb-2">Retour</a>
+    {% endif %}
+
+</section>
+</body>
+</html>

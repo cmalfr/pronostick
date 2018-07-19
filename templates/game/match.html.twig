@@ -1,0 +1,43 @@
+<div id="{{ id }}" class="col-md-6 team text-center">
+  <div class="col-md-4 col-sm2">
+      <div class="title">
+        <img class="hidden-sm hidden-xs avatar" src="{{ asset('img/wc2018.jpg') }}" alt="Team Image">
+        <h4>{{ team1 }}</h4>
+      </div>
+  </div>
+  <div class="col-md-4 col-sm-2">
+    <div class="cover">
+      <div class="text-center">
+
+        {% if app.request.attributes.get('_route') == 'game_pronosticks' %}
+            <h3>{{ score1 }} - {{ score2 }}</h3>
+            <h6 class="light muted">{{ date|date('d/m/Y à H') }}H </h6>
+        {% else %}
+            <h3>{{ score1 }} - {{ score2 }}</h3>
+            <h3 class="blue">{{ score1 }} - {{ score2 }}</h3>
+            <h6 class="light muted">{{ date|date('d/m/Y à H') }}H </h6>
+        {% endif %}
+
+        <!-- {{ app.request.attributes.get('_route') }}-->
+          {% if app.request.attributes.get('_route') == 'game_pronosticks' %}
+            {% if is_granted('ROLE_ADMIN') %}
+              <a href="{{ path('game_edit', {'id': id}) }}" class="btn btn-blue-fill ripple">Editer</a>
+            {% else %}
+              <a href="{{ path('pronostic_new', {'gameid': id}) }}" class="btn btn-blue-fill ripple">Parier</a>
+            {% endif %}
+          {% endif %}
+          {% if app.request.attributes.get('_route') == 'game_results' %}
+            {% if is_granted('ROLE_ADMIN') %}
+              <a href="{{ path('game_edit', {'id': id}) }}" class="btn btn-blue-fill ripple">Editer</a>
+            {% endif %}
+          {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-2">
+      <div class="title">
+        <img class="hidden-sm hidden-xs avatar" src="{{ asset('img/wc2018.jpg') }}" alt="Team Image">
+        <h4>{{ team2 }}</h4>
+      </div>
+  </div>
+</div>

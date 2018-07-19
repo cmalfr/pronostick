@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }} {% endblock %}
+
+{% block body %}
+	<section id="team2" class="section gray-bg">
+			<div class="container">
+				<div class="row title">
+					<h2 class="margin-top">{{ title }}</h2>
+					<h4 class="light muted">{{ subtitle }}</h4>
+				</div>
+				<div class="row">
+
+					{% for game in games %}
+						{% include '/match.html.twig' with {'id': game.id, 'team1': game.team1, 'team2': game.team2, 'score1': game.score1, 'score2':game.score2, 'pscore1': game.pscore1, 'pscore2':game.pscore2, 'date':game.date, 'result':game.result }  %}
+	        {% else %}
+					<div class="alert alert-danger" role="alert">Aucun résultat!</div>
+	        {% endfor %}
+
+				</div>
+			</div>
+		</section>
+{% endblock %}
